@@ -24,7 +24,8 @@ export default class Request {
             }, response => {
 
                 if (response.statusCode < 200 || response.statusCode > 299) {
-                    return reject(new Error('The request returned an error: ' + response.statusCode + ' ' + response.statusMessage));
+                    console.dir(response)
+                    // return reject(new Error('The request returned an error: ' + response.statusCode + ' ' + response.statusMessage));
                 }
 
                 let body = [];
@@ -33,6 +34,7 @@ export default class Request {
                     if(options.onEnd) {
                         options.onEnd(response);
                     }
+                    console.log(body)
                     resolve(JSON.parse(body.join('')));
                 });
 

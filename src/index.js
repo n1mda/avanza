@@ -308,15 +308,50 @@ export default class Avanza {
      * @param period
      */
     getChartdata(id, period = constants.ONE_YEAR) {
-        return new Request({
+        console.log('test')
+        let request = new Request({
             path: constants.CHARTDATA_PATH.replace('{0}', id) + '?' + querystring.stringify({
-                timePeriod: period
+                timePeriod: period,
+                chartResolution: 'HOUR'
             }),
             headers: {
                 'X-AuthenticationSession': this.authenticationSession,
                 'X-SecurityToken': this.securityToken
             }
         });
+
+        console.log(request)
+
+        return request;
+    }
+
+    getChartdataWeb(id, period = constants.ONE_YEAR) {
+        console.log('get chart data from web')
+
+        // let data = {
+        //     chartResolution: 'TEN_MINUTES',
+        //     chartType: 'AREA',
+        //     compareIds: [19002],
+        //     navigator: true,
+        //     orderBook: 5255,
+        //     owners: false,
+        //     percentage: false,
+        //     ta: [],
+        //     timePeriod: 'week',
+        //     volume: false,
+        //     widthOfPlotContainer: 558
+        // }
+
+        let data = {
+
+        }
+
+        let request = new Request({
+            path: constants.CHARTDATA_PATH_WEB,
+            method: 'POST'
+        })
+
+        return request;
     }
 
     /**
