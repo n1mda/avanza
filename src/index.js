@@ -326,7 +326,7 @@ export default class Avanza {
         return request;
     }
 
-    getChartdataWeb(id, resolution,startDate,endDate ) {
+    getChartdataWeb(id, resolution, startDate, endDate) {
         console.log('get chart data from web')
         let start = startDate.format("YYYY-MM-DDT00:00:00.000Z")
         let end = endDate.format("YYYY-MM-DDT22:00:00.000Z")
@@ -340,7 +340,7 @@ export default class Avanza {
             ta: [],
             start:start,
             end:end,
-            "navigator":false,
+            navigator:false,
             volume: false,
             widthOfPlotContainer: 558
         }
@@ -350,9 +350,9 @@ export default class Avanza {
         let request = new Request({
             path: constants.CHARTDATA_PATH_WEB,
             method: 'POST',
-            data:data,
-            USER_AGENT:"Mozilla/5.0",
-            accept:'application/json'
+            data: data,
+            USER_AGENT: 'Mozilla/5.0',
+            accept: 'application/json'
         })
 
         return request;
