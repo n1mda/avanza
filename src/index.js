@@ -3,6 +3,7 @@ import {EventEmitter} from 'events';
 
 import Request from './Request';
 import Socket from './Socket';
+import moment from 'moment'
 
 import * as constants from './constants'
 
@@ -325,30 +326,33 @@ export default class Avanza {
         return request;
     }
 
-    getChartdataWeb(id, period = constants.ONE_YEAR) {
+    getChartdataWeb(id, resolution,startDate,endDate ) {
         console.log('get chart data from web')
-
-        // let data = {
-        //     chartResolution: 'TEN_MINUTES',
-        //     chartType: 'AREA',
-        //     compareIds: [19002],
-        //     navigator: true,
-        //     orderBook: 5255,
-        //     owners: false,
-        //     percentage: false,
-        //     ta: [],
-        //     timePeriod: 'week',
-        //     volume: false,
-        //     widthOfPlotContainer: 558
-        // }
-
+        let start = startDate.format("YYYY-MM-DDT00:00:00.000Z")
+        let end = endDate.format("YYYY-MM-DDT22:00:00.000Z")
         let data = {
-
+            chartResolution: resolution,
+            chartType: 'AREA',
+            compareIds: [],
+            orderbookId: id,
+            owners: false,
+            percentage: false,
+            ta: [],
+            start:start,
+            end:end,
+            "navigator":false,
+            volume: false,
+            widthOfPlotContainer: 558
         }
+
+
 
         let request = new Request({
             path: constants.CHARTDATA_PATH_WEB,
-            method: 'POST'
+            method: 'POST',
+            data:data,
+            USER_AGENT:"Mozilla/5.0",
+            accept:'application/json'
         })
 
         return request;

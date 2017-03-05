@@ -17,15 +17,15 @@ export default class Request {
                 path: options.path || '',
                 method: options.method || 'POST',
                 headers: Object.assign({}, {
-                    'Accept': '*/*',
+                    'Accept': options.accept || '*/*',
                     'Content-Type': 'application/json',
-                    'User-Agent': USER_AGENT
+                    'User-Agent': options.USER_AGENT || USER_AGENT
                 }, options.headers)
             }, response => {
 
                 if (response.statusCode < 200 || response.statusCode > 299) {
                     console.dir(response)
-                    // return reject(new Error('The request returned an error: ' + response.statusCode + ' ' + response.statusMessage));
+                     return reject(new Error('The request returned an error: ' + response.statusCode + ' ' + response.statusMessage));
                 }
 
                 let body = [];
